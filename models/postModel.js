@@ -9,7 +9,7 @@ const PostsModel = mongoose.model(
         },
         log:[
             {
-            exercise:{
+            description:{
                     type:String
             },
             date:{
