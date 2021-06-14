@@ -27,10 +27,8 @@ router.get("/users/:_id/logs", (req, res)=>{
             let logFiltered = [];
             let {from, to, limit} = req.query;
             from === undefined ? from = new Date(1970-01-01) : from = new Date(from);
-            to === undefined ? to = Date.now() : to = new Date(to);
+            to === undefined ? to = new Date() : to = new Date(to);
             limit === undefined ? limit = user.log.length : limit;
-            console.log(limit)
-            console.log(user.log.length)
 
             
             for(let i = 0; i<limit ; i++){
