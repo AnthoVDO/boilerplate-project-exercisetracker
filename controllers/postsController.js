@@ -20,14 +20,14 @@ router.post("/users", urlencodedParser, async (req,res)=>{
 
 //post exercices
 
-router.post("/users/:id/exercises", urlencodedParser, async (req, res)=>{
+router.post("/users/:_id/exercises", urlencodedParser, async (req, res)=>{
     const exerciceDate = req.body.date.length===0? new Date():req.body.date;
         const newExercise = {
             date: exerciceDate,
             duration: req.body.duration,
             description:req.body.description,  
         }
-    await PostsModel.findById({_id:req.params.id}, (err, data)=>{
+    await PostsModel.findById({_id:req.params._id}, (err, data)=>{
         if(err) return err;
         else{
         data.log.push(newExercise);
