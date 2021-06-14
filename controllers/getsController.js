@@ -33,7 +33,12 @@ router.get("/users/:_id/logs", (req, res)=>{
             
             for(let i = 0; i<limit ; i++){
                 if(user.log[i].date>=from && user.log[i].date<=to){
-                    logFiltered.push(user.log[i])
+                    const exerciceToAdd = {
+                        "description" : user.log[i].description,
+                        "duration" : user.log[i].duration,
+                        "date" : user.log[i].date.toDateString()
+                    }
+                    logFiltered.push(exerciceToAdd);
                 }
             }
             
@@ -41,7 +46,7 @@ router.get("/users/:_id/logs", (req, res)=>{
             const userInfo = {
             "_id": user._id,
             "name":user.name,
-            "count":user.log.length,
+            "count":logFiltered.length,
             "log":logFiltered
             }
                                 

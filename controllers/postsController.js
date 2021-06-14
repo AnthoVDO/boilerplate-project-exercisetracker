@@ -21,7 +21,8 @@ router.post("/users", urlencodedParser, async (req,res)=>{
 //post exercices
 
 router.post("/users/:_id/exercises", urlencodedParser, async (req, res)=>{
-    const exerciceDate = req.body.date.length===0? new Date():req.body.date;
+    let exerciceDate = req.body.date.length===0? new Date():req.body.date;
+    exerciceDate = exerciceDate.toDateString();
         const newExercise = {
             date: exerciceDate,
             duration: req.body.duration,
@@ -33,7 +34,7 @@ router.post("/users/:_id/exercises", urlencodedParser, async (req, res)=>{
         data.log.push(newExercise);
         data.save();  
         const userWithExercice = {
-        "_id" : req.params.id,
+        "_id" : req.params._id,
         "username" : data.name,
         "date": exerciceDate,
         "duration": req.body.duration,
