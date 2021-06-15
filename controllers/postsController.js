@@ -25,7 +25,7 @@ router.post("/users/:_id/exercises", urlencodedParser, async (req, res)=>{
     exerciceDate = exerciceDate.toDateString();
         const newExercise = {
             date: exerciceDate,
-            duration: req.body.duration,
+            duration: parseInt(req.body.duration, 10),
             description:req.body.description,  
         }
     await PostsModel.findById({_id:req.params._id}, (err, data)=>{
@@ -37,7 +37,7 @@ router.post("/users/:_id/exercises", urlencodedParser, async (req, res)=>{
         "_id" : req.params._id,
         "username" : data.name,
         "date": exerciceDate,
-        "duration": req.body.duration,
+        "duration": parseInt(req.body.duration, 10),
         "description":req.body.description,
         }
         res.json(userWithExercice);
