@@ -45,7 +45,7 @@ router.get("/users/:_id/logs", (req, res)=>{
 
             const userInfo = {
             "_id": user._id,
-            "name":user.name,
+            "username":user.name,
             "count":parseInt(logFiltered.length,10),
             "log":logFiltered
             }
