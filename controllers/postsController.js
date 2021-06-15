@@ -6,16 +6,37 @@ const urlencodedParser = express.urlencoded({extended: false});
 
 //create user
 
-router.post("/users", urlencodedParser, async (req,res)=>{
-    await PostsModel.create({name:req.body.username});
-    await PostsModel.find({name:req.body.username}, (err, user)=>{
-        if(err) console.log(err)
-        const newUser = {
-            "username": user[0].name,
-            "_id": user[0]._id
+router.post("/users", urlencodedParser, (req,res)=>{
+    
+    PostsModel.find({name:req.body.username}, async (err, userFound)=>{
+        if(err) console.log(err);
+        else{
+            if(userFound.length === 0) {
+                await PostsModel.create({name:req.body.username});
+                await PostsModel.find({name:req.body.username}, (err, user)=>{
+                    if(err) console.log(err)
+                    else{
+                        const newUser = {
+                        "username": user[0].name,
+                        "_id": user[0]._id
+                        }
+                        res.json(newUser)
+                    }
+                })
+            }else{
+                const newUser = {
+                    "error": "this user already exist"
+                    }
+                    res.json(newUser)
+            }
         }
-        res.json(newUser)
     })
+
+
+    
+
+
+
 })
 
 //post exercices

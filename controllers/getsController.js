@@ -28,8 +28,6 @@ router.get("/users/:_id/logs", (req, res)=>{
             let {from, to, limit} = req.query;
             const checkFrom = Date.parse(from);
             const checkTo = Date.parse(to);
-            console.log(checkTo);
-            console.log(checkFrom);
             isNaN(checkFrom) ? from = new Date(1970-01-01) : from = new Date(from);
             isNaN(checkTo) ? to = new Date() : to = new Date(to);
             limit === undefined ? limit = user.log.length : limit;
